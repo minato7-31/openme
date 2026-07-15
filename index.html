@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Open Me 💙</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;overflow:hidden;height:100vh;background:linear-gradient(#020617,#0b2d63);display:flex;justify-content:center;align-items:center;color:#fff}
+.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 2s infinite alternate}
+@keyframes twinkle{from{opacity:.2}to{opacity:1}}
+.card{z-index:2;text-align:center;padding:30px}
+h1{font-size:50px;margin-bottom:15px}
+#msg{font-size:24px;min-height:35px}
+button{margin-top:20px;padding:14px 30px;border:none;border-radius:30px;background:#2563eb;color:white;font-size:20px;cursor:pointer}
+#heart{display:none;font-size:180px;animation:beat 1.5s infinite}
+@keyframes beat{50%{transform:scale(1.15)}}
+.fly{position:absolute;font-size:22px;animation:fly 6s linear forwards}
+@keyframes fly{to{transform:translateY(-110vh) translateX(var(--x));opacity:0}}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>💙 Open Me 💙</h1>
+<div id="msg"></div>
+<button onclick="go()">Devam Et</button>
+<div id="heart">💙</div>
+</div>
+<script>
+for(let i=0;i<180;i++){
+ let s=document.createElement('div');
+ s.className='star';
+ s.style.left=Math.random()*100+'vw';
+ s.style.top=Math.random()*100+'vh';
+ s.style.animationDelay=Math.random()*2+'s';
+ document.body.appendChild(s);
+}
+const text="İyi ki varsın... Sen benim için çok özelsin. 💙";
+let p=0;
+function type(){
+ if(p<text.length){
+   document.getElementById('msg').textContent+=text[p++];
+   setTimeout(type,70);
+ }
+}
+function go(){
+ document.querySelector('button').remove();
+ type();
+ setTimeout(()=>document.getElementById('heart').style.display='block',2200);
+ setInterval(()=>{
+   let h=document.createElement('div');
+   h.className='fly';
+   h.textContent='💙';
+   h.style.left=Math.random()*100+'vw';
+   h.style.top='100vh';
+   h.style.setProperty('--x',(Math.random()*300-150)+'px');
+   document.body.appendChild(h);
+   setTimeout(()=>h.remove(),6000);
+ },150);
+}
+</script>
+</body>
+</html>
